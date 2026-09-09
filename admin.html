@@ -66,7 +66,10 @@
   .fprev .st{font-weight:800;margin-top:6px;opacity:.96;font-size:.95rem;}
   .fprev .bd{font-size:.82rem;opacity:.92;margin-top:8px;line-height:1.4;}
   .fprev .cta{align-self:flex-start;margin-top:12px;background:#fff;color:#3a1a0e;font-weight:800;font-size:.8rem;padding:7px 14px;border-radius:999px;}
-  .fprev .ft{margin-top:10px;font-size:.68rem;opacity:.85;border-top:1px solid rgba(255,255,255,.25);padding-top:7px;}
+  .fprev .ft{margin-top:10px;font-size:.68rem;opacity:.85;border-top:1px solid rgba(255,255,255,.25);padding-top:7px;padding-right:74px;}
+  .fprev .qr{position:absolute;right:16px;bottom:46px;background:#fff;border-radius:8px;padding:5px 5px 3px;display:flex;flex-direction:column;align-items:center;width:62px;box-shadow:0 4px 10px rgba(0,0,0,.22);}
+  .fprev .qr img{width:52px;height:52px;display:block;}
+  .fprev .qr span{font-size:.46rem;font-weight:800;color:#3a3068;letter-spacing:.05em;margin-top:1px;}
   .fbody{padding:12px 14px;}
   .fbtns{display:flex;flex-wrap:wrap;gap:6px;}
   .fbtns .btn{font-size:.78rem;padding:.36rem .7rem;border-radius:9px;}
@@ -265,6 +268,7 @@
       card.innerHTML=
         '<div class="fprev" style="background:linear-gradient(160deg,'+col.a+','+col.b+');">'
         +'<span class="em">Gracebound</span>'
+        +'<div class="qr"><img src="assets/img/qr.png" alt=""><span>SCAN</span></div>'
         +'<span class="tag">'+esc(f.tag)+'</span>'
         +'<h3>'+esc(f.title)+'</h3>'
         +'<div class="st">'+esc(f.subtitle)+'</div>'
@@ -317,8 +321,10 @@
   /* ---------- FLYER IMAGE (canvas 1080x1350) ---------- */
   function roundRect(x,X,Y,W,H,r){x.beginPath();x.moveTo(X+r,Y);x.arcTo(X+W,Y,X+W,Y+H,r);x.arcTo(X+W,Y+H,X,Y+H,r);x.arcTo(X,Y+H,X,Y,r);x.arcTo(X,Y,X+W,Y,r);x.closePath();}
   function wrap(x,text,X,Y,maxW,lh){var words=(text||'').split(' '),line='';for(var i=0;i<words.length;i++){var t=line+words[i]+' ';if(x.measureText(t).width>maxW&&line){x.fillText(line.trim(),X,Y);line=words[i]+' ';Y+=lh;}else line=t;}if(line.trim()){x.fillText(line.trim(),X,Y);Y+=lh;}return Y;}
+  var QRIMG=new Image(); QRIMG.src='assets/img/qr.png';
+  function qrReady(){return new Promise(function(res){if(QRIMG.complete&&QRIMG.naturalWidth)return res();QRIMG.onload=function(){res();};QRIMG.onerror=function(){res();};});}
   function renderFlyerCanvas(f){
-    return document.fonts.ready.then(function(){
+    return Promise.all([document.fonts.ready, qrReady()]).then(function(){
       var W=1080,H=1350,cv=document.createElement('canvas');cv.width=W;cv.height=H;var x=cv.getContext('2d');
       var col=(GB.accentHex[f.accent]||GB.accentHex.purple);
       var g=x.createLinearGradient(0,0,W*0.5,H);g.addColorStop(0,col.a);g.addColorStop(1,col.b);x.fillStyle=g;x.fillRect(0,0,W,H);
@@ -336,12 +342,21 @@
       x.font='800 44px Figtree, sans-serif';x.fillStyle='rgba(255,255,255,.97)';ty+=18;ty=wrap(x,f.subtitle,pad,ty,W-pad*2,56);
       // body
       x.font='400 36px Figtree, sans-serif';x.fillStyle='rgba(255,255,255,.9)';ty+=16;ty=wrap(x,f.body,pad,ty,W-pad*2,50);
-      // CTA pill
-      var cy=H-260;x.fillStyle='#ffffff';roundRect(x,pad,cy,W-pad*2,104,22);x.fill();
-      x.fillStyle=col.b;x.font='800 40px Figtree, sans-serif';x.textAlign='center';x.textBaseline='middle';x.fillText(f.cta||'',W/2,cy+52);x.textAlign='left';x.textBaseline='alphabetic';
+      // CTA pill (left, auto width)
+      x.font='800 40px Figtree, sans-serif';
+      var ctaTxt=f.cta||'', ctw=x.measureText(ctaTxt).width, cpw=ctw+72, cyy=H-300, cph=100;
+      x.fillStyle='#ffffff';roundRect(x,pad,cyy,cpw,cph,22);x.fill();
+      x.fillStyle=col.b;x.textAlign='left';x.textBaseline='middle';x.fillText(ctaTxt,pad+36,cyy+cph/2);x.textBaseline='alphabetic';
+      // QR box (right)
+      if(QRIMG.complete && QRIMG.naturalWidth){
+        var qs=214, qx=W-pad-qs, qy=H-372;
+        x.fillStyle='#ffffff';roundRect(x,qx,qy,qs,qs,20);x.fill();
+        x.drawImage(QRIMG,qx+22,qy+16,qs-44,qs-44);
+        x.fillStyle=col.b;x.font='800 21px Figtree, sans-serif';x.textAlign='center';x.fillText('SCAN TO VISIT',qx+qs/2,qy+qs-14);x.textAlign='left';
+      }
       // footer
-      var c=GB.getContact();x.fillStyle='rgba(255,255,255,.9)';x.font='600 30px Figtree, sans-serif';x.fillText('graceboundhealthservices.com',pad,H-96);
-      x.textAlign='right';x.fillText(c.phone,W-pad,H-96);x.textAlign='left';
+      var c=GB.getContact();x.fillStyle='rgba(255,255,255,.92)';x.font='600 30px Figtree, sans-serif';x.textAlign='left';x.fillText('graceboundhealthservices.com',pad,H-92);
+      x.textAlign='right';x.fillText(c.phone,W-pad,H-92);x.textAlign='left';
       return cv;
     });
   }
