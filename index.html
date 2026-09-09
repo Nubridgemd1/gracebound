@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gracebound Health Services — Compassionate In-Home Personal Assistance</title>
+<meta name="description" content="Gracebound Health Services provides non-medical personal assistance in the comfort of your own home — personal care, companionship, homemaking, meals, errands and more. Our caregivers come to you.">
+<meta property="og:title" content="Gracebound Health Services — In-Home Personal Assistance">
+<meta property="og:description" content="Compassionate non-medical care that comes to you at home — personal care, companionship, homemaking, meals and errands.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://graceboundhealthservices.com">
+<meta property="og:image" content="https://nubridgemd1.github.io/gracebound/assets/share.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://nubridgemd1.github.io/gracebound/assets/share.png">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='9' fill='%234b3f86'/%3E%3Cpath d='M20 29c-6-4-9-7.5-9-11.5A4.5 4.5 0 0120 15a4.5 4.5 0 019 2.5C29 21.5 26 25 20 29z' fill='%23ef7f57'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Figtree:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --brand:#4b3f86; --brand-dk:#3a3068; --soft:#e9e4f4; --soft-2:#f3eff9;
+    --accent:#ef7f57; --accent-dk:#d8623a; --clay:#e0a04a;
+    --paper:#fbf7f2; --surface:#ffffff; --ink:#292540; --muted:#655f7a; --line:#ece3d8;
+    --shadow:0 16px 42px rgba(41,37,64,.12); --r:20px; --maxw:1160px;
+    --head:'Bricolage Grotesque',Georgia,serif; --sans:'Figtree',system-ui,sans-serif;
+    --fs:1;
+  }
+  @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+    --brand:#b3a6e6; --brand-dk:#c7bcf0; --soft:#2a2450; --soft-2:#241f44;
+    --accent:#f59a76; --accent-dk:#e8683a; --clay:#eab866;
+    --paper:#161327; --surface:#1e1a36; --ink:#ece9f6; --muted:#a9a2c4; --line:#332c52;
+    --shadow:0 16px 42px rgba(0,0,0,.42);
+  }}
+  :root[data-theme="dark"]{
+    --brand:#b3a6e6; --brand-dk:#c7bcf0; --soft:#2a2450; --soft-2:#241f44;
+    --accent:#f59a76; --accent-dk:#e8683a; --clay:#eab866;
+    --paper:#161327; --surface:#1e1a36; --ink:#ece9f6; --muted:#a9a2c4; --line:#332c52;
+    --shadow:0 16px 42px rgba(0,0,0,.42);
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{font-size:calc(18.5px * var(--fs));scroll-behavior:smooth;}
+  body{font-family:var(--sans);background:var(--paper);color:var(--ink);line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+  a{color:inherit;}
+  img{max-width:100%;display:block;}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 22px;}
+  h1,h2,h3{font-family:var(--head);font-weight:700;line-height:1.1;letter-spacing:-.015em;}
+  section{padding:74px 0;}
+  p{margin:.55em 0;}
+  .eyebrow{font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--brand);font-size:.82rem;}
+  .lead{font-size:1.16rem;color:var(--muted);}
+  .btn{display:inline-flex;align-items:center;gap:.5rem;font-family:var(--sans);font-weight:800;font-size:1.02rem;padding:.85rem 1.5rem;border-radius:999px;border:2.5px solid transparent;cursor:pointer;text-decoration:none;transition:transform .12s,box-shadow .2s,background .2s;}
+  .btn-lg{font-size:1.12rem;padding:1rem 1.8rem;}
+  .btn-primary{
+    background:linear-gradient(180deg,#ffb98f 0%,#f0885a 52%,#e5713f 100%);
+    color:#3a1a0e;border:none;text-shadow:0 1px 0 rgba(255,255,255,.32);
+    box-shadow:0 10px 24px rgba(224,98,58,.42), inset 0 1.6px 0 rgba(255,255,255,.6), inset 0 -2px 6px rgba(150,55,20,.25);
+  }
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 16px 34px rgba(224,98,58,.52), inset 0 1.6px 0 rgba(255,255,255,.7);}
+  .btn-ghost{border-color:var(--brand);color:var(--brand);background:transparent;}
+  .btn-ghost:hover{background:var(--soft);}
+  :focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:6px;}
+  .skip{position:absolute;left:-999px;top:0;background:var(--brand);color:#fff;padding:.7rem 1.1rem;z-index:200;font-weight:700;border-radius:0 0 10px 0;}
+  .skip:focus{left:0;}
+
+  /* header */
+  header{position:sticky;top:0;z-index:100;background:color-mix(in srgb,var(--paper) 92%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);}
+  .topbar{background:var(--brand);color:#fff;font-size:.92rem;}
+  :root[data-theme="dark"] .topbar,:root:not([data-theme="light"]) .topbar{color:#f3f0ff;}
+  .topbar .wrap{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding:7px 22px;}
+  .topbar a{color:inherit;text-decoration:none;font-weight:700;}
+  .a11y{display:flex;align-items:center;gap:6px;}
+  .a11y .lbl{opacity:.85;font-weight:600;margin-right:2px;}
+  .a11y button{border:1.5px solid rgba(255,255,255,.5);background:transparent;color:inherit;border-radius:8px;cursor:pointer;font-family:var(--sans);font-weight:800;padding:2px 9px;}
+  .nav{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px 0;}
+  .brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--ink);}
+  .brand .nm{font-family:var(--head);font-weight:800;font-size:1.32rem;line-height:1;}
+  .brand .sl{font-size:.7rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);}
+  .navlinks{display:flex;align-items:center;gap:24px;}
+  .navlinks a{text-decoration:none;font-weight:700;color:var(--ink);}
+  .navlinks a:hover{color:var(--brand);}
+  .navtools{display:flex;align-items:center;gap:10px;}
+  .burger{display:none;width:48px;height:48px;border:2px solid var(--line);border-radius:12px;background:transparent;color:var(--ink);font-size:22px;cursor:pointer;}
+  .mobonly{display:none;}
+
+  /* hero */
+  .hero{position:relative;overflow:hidden;background:
+    radial-gradient(80% 65% at 88% -5%, color-mix(in srgb,var(--accent) 26%, transparent), transparent 58%),
+    radial-gradient(70% 60% at -5% 100%, color-mix(in srgb,var(--brand) 20%, transparent), transparent 60%),
+    linear-gradient(160deg,var(--soft-2),var(--paper));}
+  .hero .wrap{display:grid;grid-template-columns:1.08fr .92fr;gap:44px;align-items:center;padding:60px 22px;}
+  .hero h1{font-size:clamp(2.3rem,4.6vw,3.5rem);margin-bottom:.35em;}
+  .hero h1 .hl{color:var(--accent-dk);}
+  :root[data-theme="dark"] .hero h1 .hl,:root:not([data-theme="light"]) .hero h1 .hl{color:var(--accent);}
+  .hero .cta{display:flex;gap:14px;flex-wrap:wrap;margin-top:1.4rem;}
+  .hero .pts{display:flex;flex-wrap:wrap;gap:10px 20px;margin-top:1.4rem;font-weight:700;color:var(--brand);}
+  .hero .pts span{display:flex;align-items:center;gap:8px;}
+  .tick{flex:none;width:26px;height:26px;border-radius:50%;background:var(--accent);color:#3a1a0e;display:grid;place-items:center;font-weight:900;font-size:.9rem;}
+  .hero-card{background:linear-gradient(180deg,var(--surface),color-mix(in srgb,var(--surface) 88%,var(--paper)));border:1px solid var(--line);border-radius:26px;box-shadow:var(--shadow),inset 0 1px 0 rgba(255,255,255,.6);overflow:hidden;}
+  .hero-card .band{background:linear-gradient(135deg,var(--brand),var(--brand-dk));padding:24px 26px;color:#fff;}
+  :root[data-theme="dark"] .hero-card .band,:root:not([data-theme="light"]) .hero-card .band{color:#f3f0ff;}
+  .hero-card .band .big{font-family:var(--head);font-size:1.7rem;line-height:1.1;}
+  .hero-card .band .sm{opacity:.92;font-weight:700;}
+  .hero-card ul{list-style:none;padding:18px 24px 24px;display:grid;gap:12px;}
+  .hero-card li{display:flex;gap:12px;font-weight:600;}
+
+  .strip{background:var(--brand);color:#fff;}
+  :root[data-theme="dark"] .strip,:root:not([data-theme="light"]) .strip{color:#f3f0ff;}
+  .strip .wrap{display:flex;flex-wrap:wrap;gap:14px 40px;justify-content:center;padding:18px 22px;font-weight:700;text-align:center;}
+
+  .sh{max-width:730px;margin:0 auto 46px;text-align:center;}
+  .sh h2{font-size:clamp(1.9rem,3.4vw,2.6rem);margin:.25em 0;}
+
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
+  .card{background:linear-gradient(180deg,var(--surface),color-mix(in srgb,var(--surface) 87%,var(--paper)));border:1px solid var(--line);border-radius:var(--r);padding:26px 24px;box-shadow:0 16px 40px rgba(41,37,64,.11),inset 0 1px 0 rgba(255,255,255,.6);transition:transform .15s,box-shadow .2s;}
+  .card:hover{transform:translateY(-4px);box-shadow:0 24px 54px rgba(41,37,64,.16),inset 0 1px 0 rgba(255,255,255,.7);}
+  .card .ic{width:58px;height:58px;border-radius:16px;background:var(--soft);display:grid;place-items:center;margin-bottom:15px;}
+  .card .ic svg{width:30px;height:30px;stroke:var(--brand);fill:none;stroke-width:2.1;stroke-linecap:round;stroke-linejoin:round;}
+  .card h3{font-size:1.28rem;margin-bottom:.25em;}
+  .card p{color:var(--muted);font-size:1rem;margin:0;}
+
+  .alt{background:var(--soft-2);}
+  .split{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;}
+  .split h2{font-size:clamp(1.9rem,3.4vw,2.6rem);margin-bottom:.3em;}
+  .checklist{list-style:none;display:grid;gap:13px;margin-top:1rem;}
+  .checklist li{display:flex;gap:14px;font-size:1.06rem;font-weight:600;}
+  .panel-img{border-radius:24px;min-height:330px;background:
+    radial-gradient(120% 90% at 80% 10%, color-mix(in srgb,var(--accent) 42%,transparent), transparent 55%),
+    linear-gradient(160deg,var(--brand),var(--brand-dk));box-shadow:var(--shadow);display:grid;place-items:center;color:#fff;text-align:center;padding:30px;}
+  .panel-img .q{font-family:var(--head);font-size:1.45rem;line-height:1.3;max-width:23ch;font-weight:600;}
+  .panel-img .cap{margin-top:14px;font-weight:700;opacity:.92;}
+
+  /* steps */
+  .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;}
+  .step{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:24px;box-shadow:var(--shadow);}
+  .step .n{width:46px;height:46px;border-radius:50%;background:linear-gradient(180deg,#ffb98f,#e5713f);color:#3a1a0e;display:grid;place-items:center;font-family:var(--head);font-weight:800;font-size:1.3rem;margin-bottom:14px;}
+  .step h3{font-size:1.2rem;margin-bottom:.2em;}
+  .step p{color:var(--muted);font-size:1rem;margin:0;}
+
+  /* areas */
+  .areas-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;}
+  .arealist{list-style:none;display:flex;flex-wrap:wrap;gap:12px;margin-top:1rem;}
+  .arealist span{background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:9px 18px;font-weight:600;}
+  .map{border-radius:24px;min-height:320px;background:var(--soft);border:1px solid var(--line);display:grid;place-items:center;color:var(--brand);font-weight:700;text-align:center;padding:24px;}
+
+  /* options */
+  .plans{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
+  .plan{background:var(--surface);border:2px solid var(--line);border-radius:var(--r);padding:28px 26px;box-shadow:var(--shadow);display:flex;flex-direction:column;}
+  .plan.feature{border-color:var(--accent);}
+  .plan .tag{font-weight:800;font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;color:var(--accent-dk);}
+  .plan h3{font-size:1.4rem;margin:.15em 0;}
+  .plan .sub{color:var(--muted);font-weight:600;}
+  .plan ul{list-style:none;display:grid;gap:10px;margin:16px 0 22px;}
+  .plan li{display:flex;gap:10px;color:var(--muted);font-weight:600;}
+  .li-tick{color:var(--brand);font-weight:900;flex:none;}
+  .plan .btn{margin-top:auto;justify-content:center;}
+
+  /* faq */
+  .faq{max-width:820px;margin:0 auto;}
+  details{background:var(--surface);border:1px solid var(--line);border-radius:16px;margin-bottom:12px;}
+  summary{cursor:pointer;font-weight:800;font-size:1.1rem;padding:16px 18px;list-style:none;display:flex;justify-content:space-between;gap:12px;align-items:center;}
+  summary::-webkit-details-marker{display:none;}
+  summary::after{content:"+";color:var(--accent-dk);font-size:1.6rem;font-weight:800;}
+  details[open] summary::after{content:"–";}
+  details p{padding:0 18px 18px;color:var(--muted);margin:0;}
+
+  /* contact */
+  .contact-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:44px;}
+  .info li{list-style:none;display:flex;gap:16px;padding:15px 0;border-bottom:1px solid var(--line);}
+  .info .d{flex:none;width:52px;height:52px;border-radius:13px;background:var(--soft);display:grid;place-items:center;}
+  .info .d svg{width:26px;height:26px;stroke:var(--brand);fill:none;stroke-width:2.1;stroke-linecap:round;stroke-linejoin:round;}
+  .info b{font-size:1.05rem;} .info a,.info span{color:var(--muted);text-decoration:none;}
+  form{background:linear-gradient(180deg,var(--surface),color-mix(in srgb,var(--surface) 90%,var(--paper)));border:1px solid var(--line);border-radius:24px;padding:30px;box-shadow:var(--shadow);}
+  .field{margin-bottom:15px;}
+  label{display:block;font-weight:800;margin-bottom:7px;}
+  input,select,textarea{width:100%;font-family:inherit;font-size:1.03rem;color:var(--ink);background:var(--paper);border:2px solid var(--line);border-radius:12px;padding:12px 15px;}
+  input:focus,select:focus,textarea:focus{outline:none;border-color:var(--brand);}
+  textarea{min-height:110px;resize:vertical;}
+  .row2{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+  .form-note{font-size:.9rem;color:var(--muted);margin-top:10px;}
+
+  footer{background:var(--brand-dk);color:#e6e1f7;padding:54px 0 26px;}
+  footer a{color:#e6e1f7;}
+  .foot-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:34px;}
+  .foot-grid h4{font-size:.85rem;letter-spacing:.1em;text-transform:uppercase;color:#bcb2ea;margin-bottom:12px;}
+  .foot-grid a{display:block;text-decoration:none;padding:5px 0;opacity:.92;}
+  .foot-grid a:hover{opacity:1;text-decoration:underline;}
+  .foot-note{background:rgba(255,255,255,.08);border-radius:14px;padding:12px 16px;font-size:.82rem;margin-top:16px;}
+  .foot-bot{margin-top:36px;border-top:1px solid rgba(255,255,255,.16);padding-top:20px;font-size:.85rem;opacity:.85;}
+
+  @media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important;}}
+  @media (max-width:940px){
+    .hero .wrap,.split,.areas-grid,.contact-grid{grid-template-columns:1fr;}
+    .grid,.steps,.plans{grid-template-columns:1fr 1fr;}
+    .foot-grid{grid-template-columns:1fr 1fr;}
+  }
+  @media (max-width:680px){
+    .navlinks{display:none;}
+    .navtools .btn-ghost{display:none;}
+    .navlinks.open{display:flex;position:absolute;top:100%;left:0;right:0;flex-direction:column;align-items:flex-start;background:var(--paper);border-bottom:1px solid var(--line);padding:14px 22px;gap:6px;}
+    .navlinks.open a{padding:10px 0;font-size:1.15rem;}
+    .navlinks.open .mobonly{display:block;color:var(--brand);}
+    .burger{display:grid;place-items:center;}
+    .grid,.steps,.plans,.foot-grid,.row2{grid-template-columns:1fr;}
+    .topbar .wrap{justify-content:center;}
+  }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+
+<header>
+  <div class="topbar">
+    <div class="wrap">
+      <div>📞 <a href="tel:+15551234567">(555) 123-4567</a> &nbsp;·&nbsp; Caregivers available 24/7</div>
+      <div class="a11y" role="group" aria-label="Text size">
+        <span class="lbl">Text size</span>
+        <button type="button" id="fsDown" aria-label="Decrease text size">A−</button>
+        <button type="button" id="fsReset" aria-label="Reset text size">A</button>
+        <button type="button" id="fsUp" aria-label="Increase text size">A+</button>
+      </div>
+    </div>
+  </div>
+  <div class="wrap nav">
+    <a class="brand" href="#top" aria-label="Gracebound Health Services home">
+      <svg width="46" height="46" viewBox="0 0 40 40" aria-hidden="true"><rect width="40" height="40" rx="11" fill="var(--brand)"/><path d="M20 30c-6.5-4.2-9.5-8-9.5-12A4.8 4.8 0 0120 15.4 4.8 4.8 0 0129.5 18c0 4-3 7.8-9.5 12z" fill="var(--accent)"/></svg>
+      <span><span class="nm">Gracebound Health Services</span><br><span class="sl">In-Home Personal Assistance · We Come to You</span></span>
+    </a>
+    <nav class="navlinks" id="nav" aria-label="Primary">
+      <a href="#services">Services</a>
+      <a href="#how">How it works</a>
+      <a href="#why">Why us</a>
+      <a href="#areas">Service areas</a>
+      <a href="#faq">FAQ</a>
+      <a href="#contact" class="mobonly">Request care</a>
+    </nav>
+    <div class="navtools">
+      <a href="#contact" class="btn btn-primary">Request care</a>
+      <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false">☰</button>
+    </div>
+  </div>
+</header>
+
+<span id="top"></span>
+<main id="main">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <span class="eyebrow">Compassionate, non-medical in-home care</span>
+        <h1>Caring support that <span class="hl">comes to you</span>, right at home.</h1>
+        <p class="lead">Gracebound Health Services provides warm, non-medical personal assistance in the comfort of your own home — from help with daily routines to friendly companionship. No facility to move into. Our vetted caregivers come to your residence.</p>
+        <div class="cta">
+          <a href="#contact" class="btn btn-primary btn-lg">Request care today</a>
+          <a href="tel:+15551234567" class="btn btn-ghost btn-lg">📞 Call (555) 123-4567</a>
+        </div>
+        <div class="pts">
+          <span><span class="tick">✓</span> Caregivers come to your home</span>
+          <span><span class="tick">✓</span> Background-checked &amp; insured</span>
+          <span><span class="tick">✓</span> Flexible hours, up to 24/7</span>
+        </div>
+      </div>
+      <div class="hero-card" aria-label="How to get started">
+        <div class="band">
+          <div class="sm">Getting started is simple</div>
+          <div class="big">Free in-home consultation</div>
+          <div class="sm">No obligation — we build a plan around you</div>
+        </div>
+        <ul>
+          <li><span class="tick" aria-hidden="true">✓</span><div><b>We visit you</b> — care is delivered in your own residence</div></li>
+          <li><span class="tick" aria-hidden="true">✓</span><div><b>Personalized plan</b> — only the help you actually need</div></li>
+          <li><span class="tick" aria-hidden="true">✓</span><div><b>Matched caregiver</b> — vetted, trained and a good fit</div></li>
+          <li><span class="tick" aria-hidden="true">✓</span><div><b>No long contracts</b> — adjust or pause any time</div></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <div class="strip"><div class="wrap">
+    <span>🏠 Care in your own home</span>
+    <span>🕐 A few hours to around-the-clock</span>
+    <span>🛡️ Background-checked, insured &amp; bonded</span>
+    <span>❤️ Person-centered &amp; respectful</span>
+  </div></div>
+
+  <!-- SERVICES -->
+  <section id="services">
+    <div class="wrap">
+      <div class="sh">
+        <span class="eyebrow">Our services</span>
+        <h2>Non-medical personal assistance, at home</h2>
+        <p class="lead">Everyday support that helps you or your loved one stay safe, comfortable and independent — provided wherever you call home.</p>
+      </div>
+      <div class="grid">
+        <div class="card"><div class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="7" r="3.2"/><path d="M5 20c0-3.5 3-6 7-6s7 2.5 7 6"/></svg></div><h3>Personal care</h3><p>Respectful help with bathing, grooming, dressing, toileting and everyday hygiene.</p></div>
+        <div class="card"><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.4-7-10a7 7 0 0114 0c0 5.6-7 10-7 10z"/><circle cx="12" cy="11" r="2.4"/></svg></div><h3>Companionship</h3><p>Friendly conversation, activities, hobbies and outings — and a caring, watchful presence.</p></div>
+        <div class="card"><div class="ic"><svg viewBox="0 0 24 24"><path d="M4 20v-8l8-6 8 6v8"/><path d="M9 20v-5h6v5"/></svg></div><h3>Homemaking</h3><p>Light housekeeping, laundry, tidying and keeping the home safe and comfortable.</p></div>
+        <div class="card"><div class="ic"><svg viewBox="0 0 24 24"><path d="M4 3v18M4 8h6a0 0 0 010 0 4 4 0 01-4 4H4"/><path d="M14 3c3 0 5 2 5 6s-2 6-5 6"/><path d="M14 15v6"/></svg></div><h3>Meal preparation</h3><p>Nutritious, tailored meals, grocery help and gentle assistance at mealtimes.</p></div>
+        <div class="card"><div class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div><h3>Medication reminders</h3><p>Timely, non-medical reminders to help keep routines on track (we do not administer medication).</p></div>
+        <div class="card"><div class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="11" rx="2"/><path d="M7 21l2-3M17 21l-2-3M3 12h18"/></svg></div><h3>Errands &amp; transportation</h3><p>Rides to appointments, shopping, pharmacy pickups and getting out and about.</p></div>
+        <div class="card"><div class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="5" r="2.2"/><path d="M9 21l2-6-3-2 1-4 3 2 3 1"/><path d="M8 10l-2 2M16 22l-1-5"/></svg></div><h3>Mobility &amp; transfers</h3><p>Safe support with walking, transfers and fall-prevention around the home.</p></div>
+        <div class="card"><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.4-7-10a7 7 0 0114 0c0 5.6-7 10-7 10z"/><path d="M9 11l2 2 4-4"/></svg></div><h3>Respite care</h3><p>Trusted, temporary relief so family caregivers can rest, travel or take time for themselves.</p></div>
+        <div class="card"><div class="ic"><svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 0118 0"/><circle cx="12" cy="12" r="1.6"/><path d="M12 3v2M3 12H1M23 12h-2M12 21v0"/></svg></div><h3>Overnight &amp; 24-hour</h3><p>Overnight stays and around-the-clock support in the home, for extra peace of mind.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="alt" id="how">
+    <div class="wrap">
+      <div class="sh">
+        <span class="eyebrow">How it works</span>
+        <h2>Care that comes to your door — in four steps</h2>
+        <p class="lead">There's no facility to move into. We bring the care to you.</p>
+      </div>
+      <div class="steps">
+        <div class="step"><div class="n">1</div><h3>Reach out</h3><p>Call or send a request. We'll listen and answer your questions — no pressure.</p></div>
+        <div class="step"><div class="n">2</div><h3>Free home visit</h3><p>We visit your residence to understand your needs, home and daily routine.</p></div>
+        <div class="step"><div class="n">3</div><h3>Your care plan</h3><p>We build a personalized plan and match you with the right, vetted caregiver.</p></div>
+        <div class="step"><div class="n">4</div><h3>Ongoing care</h3><p>Care begins on your schedule, with check-ins and updates for the family.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY US -->
+  <section id="why">
+    <div class="wrap split">
+      <div>
+        <span class="eyebrow">Why families choose Gracebound</span>
+        <h2>Trusted caregivers, treated like family</h2>
+        <p class="lead">Choosing in-home support is a big decision. We make it easier with dependable, compassionate care and clear communication every step of the way.</p>
+        <ul class="checklist">
+          <li><span class="tick" aria-hidden="true">✓</span> Caregivers are background-checked, trained and insured &amp; bonded</li>
+          <li><span class="tick" aria-hidden="true">✓</span> Care delivered in your own home — never a facility</li>
+          <li><span class="tick" aria-hidden="true">✓</span> Flexible scheduling, from a few hours a week to 24/7</li>
+          <li><span class="tick" aria-hidden="true">✓</span> Personalized plans, thoughtful caregiver matching</li>
+          <li><span class="tick" aria-hidden="true">✓</span> Ongoing family updates and easy caregiver changes</li>
+          <li><span class="tick" aria-hidden="true">✓</span> No long-term contracts — adjust or pause any time</li>
+        </ul>
+      </div>
+      <div class="panel-img">
+        <div>
+          <div class="q">&ldquo;Mom stayed in her own home, with someone kind she trusts by her side. It gave our whole family peace of mind.&rdquo;</div>
+          <div class="cap">— A Gracebound family · illustrative</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHO WE SERVE -->
+  <section class="alt">
+    <div class="wrap">
+      <div class="sh">
+        <span class="eyebrow">Who we help</span>
+        <h2>Support for wherever life is</h2>
+      </div>
+      <div class="grid">
+        <div class="card"><div class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="7" r="3.2"/><path d="M5 20c0-3.5 3-6 7-6s7 2.5 7 6"/></svg></div><h3>Seniors aging at home</h3><p>Daily support so older adults can stay safe, comfortable and independent where they love to be.</p></div>
+        <div class="card"><div class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="6" r="2.4"/><path d="M12 9v7M8 21l4-5 4 5M7 12h10"/></svg></div><h3>Adults with disabilities</h3><p>Respectful, tailored personal assistance that supports dignity and everyday living.</p></div>
+        <div class="card"><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.4-7-10a7 7 0 0114 0c0 5.6-7 10-7 10z"/><path d="M9 11l2 2 4-4"/></svg></div><h3>Recovery &amp; post-surgery</h3><p>A helping hand at home while recovering from illness, surgery or a hospital stay.</p></div>
+        <div class="card"><div class="ic"><svg viewBox="0 0 24 24"><path d="M6 21v-2a4 4 0 014-4h0M14 11a3 3 0 100-6 3 3 0 000 6z"/><path d="M13 21v-2a4 4 0 014-4h1a3 3 0 013 3v3"/></svg></div><h3>Family caregivers</h3><p>Respite and backup so the people who care for loved ones can rest and recharge.</p></div>
+        <div class="card"><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 3v18M5 8c0-3 3-4 7-4M19 8c0-3-3-4-7-4"/><path d="M5 8v8c0 3 3 4 7 4M19 8v8c0 3-3 4-7 4"/></svg></div><h3>Living with chronic conditions</h3><p>Consistent non-medical daily support that makes managing everyday life easier.</p></div>
+        <div class="card"><div class="ic"><svg viewBox="0 0 24 24"><path d="M4 20v-8l8-6 8 6v8"/><path d="M9 20v-5h6v5"/></svg></div><h3>Anyone who needs a hand</h3><p>If daily tasks have become harder, we're here — right in the comfort of home.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CARE OPTIONS -->
+  <section id="options">
+    <div class="wrap">
+      <div class="sh">
+        <span class="eyebrow">Flexible care options</span>
+        <h2>Pay for just the care you need</h2>
+        <p class="lead">Every plan is customized after your free consultation. Choose as little or as much support as you'd like.</p>
+      </div>
+      <div class="plans">
+        <div class="plan">
+          <span class="tag">Great to start</span>
+          <h3>Hourly Visits</h3>
+          <div class="sub">A few hours, when you need them</div>
+          <ul>
+            <li><span class="li-tick">✓</span> Companionship &amp; check-ins</li>
+            <li><span class="li-tick">✓</span> Errands, meals &amp; light homemaking</li>
+            <li><span class="li-tick">✓</span> Flexible days and times</li>
+          </ul>
+          <a href="#contact" class="btn btn-ghost">Get a quote</a>
+        </div>
+        <div class="plan feature">
+          <span class="tag">Most popular</span>
+          <h3>Daily Support</h3>
+          <div class="sub">Regular help, part or full day</div>
+          <ul>
+            <li><span class="li-tick">✓</span> Personal care &amp; mobility help</li>
+            <li><span class="li-tick">✓</span> Meals, homemaking &amp; routines</li>
+            <li><span class="li-tick">✓</span> Consistent, matched caregiver</li>
+          </ul>
+          <a href="#contact" class="btn btn-primary">Get a quote</a>
+        </div>
+        <div class="plan">
+          <span class="tag">Around the clock</span>
+          <h3>24-Hour &amp; Overnight</h3>
+          <div class="sub">Continuous care, in the home</div>
+          <ul>
+            <li><span class="li-tick">✓</span> Overnight &amp; live-in style support</li>
+            <li><span class="li-tick">✓</span> Full personal-care assistance</li>
+            <li><span class="li-tick">✓</span> Extra safety &amp; peace of mind</li>
+          </ul>
+          <a href="#contact" class="btn btn-ghost">Get a quote</a>
+        </div>
+      </div>
+      <p class="lead" style="text-align:center;margin-top:24px;font-size:1rem;">Ask us about private pay and long-term care insurance. Gracebound provides non-medical personal assistance only.</p>
+    </div>
+  </section>
+
+  <!-- AREAS -->
+  <section class="alt" id="areas">
+    <div class="wrap">
+      <div class="sh">
+        <span class="eyebrow">Service areas</span>
+        <h2>We come to you</h2>
+        <p class="lead">Gracebound caregivers travel to clients' homes across the communities we serve.</p>
+      </div>
+      <div class="areas-grid">
+        <div>
+          <p class="lead" style="font-size:1.05rem;">Proudly serving <b>[Your City]</b> and the surrounding areas, including:</p>
+          <ul class="arealist">
+            <span>[Neighborhood One]</span><span>[Neighborhood Two]</span><span>[Neighborhood Three]</span>
+            <span>[Suburb / Town]</span><span>[Suburb / Town]</span><span>[County / Region]</span>
+          </ul>
+          <p style="margin-top:16px;color:var(--muted);">Not sure if we cover your area? <a href="#contact" style="color:var(--brand);font-weight:700;">Just ask</a> — we're often able to help nearby, too.</p>
+        </div>
+        <div class="map" role="img" aria-label="Map placeholder of the Gracebound service area">
+          <div>🗺️<br>Our service area<br><span style="font-weight:600;color:var(--muted);">(Add your city &amp; a map here)</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq">
+    <div class="wrap">
+      <div class="sh"><span class="eyebrow">Good to know</span><h2>Frequently asked questions</h2></div>
+      <div class="faq">
+        <details open><summary>Is this medical or nursing care?</summary><p>No. Gracebound provides <b>non-medical personal assistance</b> — help with daily living, companionship, homemaking and similar support. We are not a licensed medical, nursing or home-health agency, and our caregivers do not provide medical treatment or administer medication. For medical needs, we're happy to work alongside your healthcare providers.</p></details>
+        <details><summary>Where is care provided?</summary><p>In your own home or residence — we come to you. There is no facility to move into. Care can be provided in a house, apartment, a family member's home, or an assisted-living residence.</p></details>
+        <details><summary>Are your caregivers screened?</summary><p>Yes. Caregivers are background-checked, carefully interviewed and trained, and we are insured and bonded. We also match you with a caregiver suited to your needs and personality.</p></details>
+        <details><summary>Is there a minimum number of hours?</summary><p>We keep it flexible. Whether you need a few hours a week or around-the-clock support, we'll build a plan that fits. We'll go over any minimums during your free consultation.</p></details>
+        <details><summary>Can we choose or change our caregiver?</summary><p>Absolutely. Your comfort matters — if a match isn't quite right, just let us know and we'll arrange a change.</p></details>
+        <details><summary>How do we pay?</summary><p>Most families pay privately, and long-term care insurance may apply. We'll explain simple, transparent options with no long-term contracts.</p></details>
+        <details><summary>How do we get started?</summary><p>Call (555) 123‑4567 or send the request form below. We'll schedule a free in-home visit, answer your questions, and create a care plan together.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="alt" id="contact">
+    <div class="wrap">
+      <div class="sh">
+        <span class="eyebrow">Let's talk</span>
+        <h2>Request care or ask a question</h2>
+        <p class="lead">For yourself or a loved one — we're here to help, with a free, no-obligation consultation.</p>
+      </div>
+      <div class="contact-grid">
+        <ul class="info">
+          <li><div class="d"><svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A16 16 0 013 6a2 2 0 012-2z"/></svg></div><div><b>Call or text</b><br><a href="tel:+15551234567">(555) 123-4567</a></div></li>
+          <li><div class="d"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M4 7l8 6 8-6"/></svg></div><div><b>Email</b><br><a href="mailto:care@graceboundhealthservices.com">care@graceboundhealthservices.com</a></div></li>
+          <li><div class="d"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.35-7-10a7 7 0 0114 0c0 5.65-7 10-7 10z"/><circle cx="12" cy="11" r="2.5"/></svg></div><div><b>Service area</b><br><span>[Your City] &amp; surrounding communities · office visits by appointment</span></div></li>
+          <li><div class="d"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div><div><b>Available</b><br><span>Care 24/7 · office phone daily 8am–7pm</span></div></li>
+        </ul>
+        <form id="careForm" aria-label="Request care form">
+          <div class="row2">
+            <div class="field"><label for="nm">Your name</label><input id="nm" name="nm" required></div>
+            <div class="field"><label for="ph">Phone</label><input id="ph" name="ph" type="tel"></div>
+          </div>
+          <div class="field"><label for="em">Email</label><input id="em" name="em" type="email"></div>
+          <div class="row2">
+            <div class="field"><label for="who">Care is for…</label>
+              <select id="who" name="who"><option>Myself</option><option>My parent</option><option>My spouse</option><option>Another loved one</option></select></div>
+            <div class="field"><label for="svc">Help needed with…</label>
+              <select id="svc" name="svc"><option>Personal care</option><option>Companionship</option><option>Homemaking &amp; meals</option><option>Errands &amp; transportation</option><option>Respite care</option><option>24-hour / overnight</option><option>Not sure yet</option></select></div>
+          </div>
+          <div class="field"><label for="msg">Tell us a little more</label><textarea id="msg" name="msg" placeholder="When you'd like to start, the area you're in, and anything else we should know."></textarea></div>
+          <button type="submit" class="btn btn-primary btn-lg" style="width:100%;justify-content:center;">Request care</button>
+          <p class="form-note">Prefer to talk? Call (555) 123‑4567 any time. Please don't include sensitive medical details in this form.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a class="brand" href="#top" style="color:#fff;margin-bottom:12px;">
+          <svg width="42" height="42" viewBox="0 0 40 40" aria-hidden="true"><rect width="40" height="40" rx="11" fill="#ffffff" opacity=".14"/><path d="M20 30c-6.5-4.2-9.5-8-9.5-12A4.8 4.8 0 0120 15.4 4.8 4.8 0 0129.5 18c0 4-3 7.8-9.5 12z" fill="var(--accent)"/></svg>
+          <span class="nm" style="color:#fff;">Gracebound Health Services</span>
+        </a>
+        <p style="opacity:.9;max-width:36ch;">Compassionate, non-medical personal assistance delivered in the comfort of your own home. Our caregivers come to you.</p>
+      </div>
+      <div><h4>Services</h4><a href="#services">Personal care</a><a href="#services">Companionship</a><a href="#services">Homemaking &amp; meals</a><a href="#services">Respite &amp; 24-hour</a></div>
+      <div><h4>Contact</h4><a href="tel:+15551234567">(555) 123-4567</a><a href="mailto:care@graceboundhealthservices.com">Email us</a><a href="#contact">Request care</a><a href="https://graceboundhealthservices.com">graceboundhealthservices.com</a></div>
+    </div>
+    <div class="foot-note"><b>Design concept / demo.</b> Gracebound Health Services is a sample website. Name, contact details, service areas and images are placeholders to be replaced. Gracebound provides <b>non-medical personal assistance</b> and is not a licensed medical, nursing or home-health agency; it does not provide medical treatment.</div>
+    <div class="foot-bot">© <span id="yr"></span> Gracebound Health Services · In-Home Personal Assistance</div>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('yr').textContent=new Date().getFullYear();
+  var burger=document.getElementById('burger'), nav=document.getElementById('nav');
+  burger.addEventListener('click',function(){var o=nav.classList.toggle('open');burger.setAttribute('aria-expanded',o?'true':'false');});
+  nav.addEventListener('click',function(e){if(e.target.tagName==='A'){nav.classList.remove('open');burger.setAttribute('aria-expanded','false');}});
+
+  var STEPS=[0.9,1,1.12,1.28,1.45], root=document.documentElement, idx=1;
+  try{var s=parseFloat(localStorage.getItem('gb-fs'));if(!isNaN(s)){var k=STEPS.indexOf(s);idx=k>=0?k:1;}}catch(e){}
+  function applyFs(){root.style.setProperty('--fs',STEPS[idx]);try{localStorage.setItem('gb-fs',STEPS[idx]);}catch(e){}}
+  applyFs();
+  document.getElementById('fsUp').onclick=function(){idx=Math.min(STEPS.length-1,idx+1);applyFs();};
+  document.getElementById('fsDown').onclick=function(){idx=Math.max(0,idx-1);applyFs();};
+  document.getElementById('fsReset').onclick=function(){idx=1;applyFs();};
+
+  document.getElementById('careForm').addEventListener('submit',function(e){
+    e.preventDefault();var f=e.target;
+    var s=encodeURIComponent('Gracebound care request — '+f.nm.value);
+    var b=encodeURIComponent('Name: '+f.nm.value+'\nPhone: '+f.ph.value+'\nEmail: '+f.em.value+'\nCare for: '+f.who.value+'\nHelp with: '+f.svc.value+'\n\n'+f.msg.value);
+    window.location.href='mailto:care@graceboundhealthservices.com?subject='+s+'&body='+b;
+  });
+</script>
+</body>
+</html>
