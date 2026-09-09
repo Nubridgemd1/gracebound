@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gracebound Admin Studio</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='9' fill='%234b3f86'/%3E%3Cpath d='M20 29c-6-4-9-7.5-9-11.5A4.5 4.5 0 0120 15a4.5 4.5 0 019 2.5C29 21.5 26 25 20 29z' fill='%23ef7f57'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Figtree:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{--brand:#4b3f86;--brand-dk:#3a3068;--accent:#ef7f57;--accent-dk:#d8623a;--soft:#efeaf8;--paper:#f6f3fb;--surface:#fff;--ink:#292540;--muted:#6b6486;--line:#e3ddf0;--ok:#2f7d57;--r:14px;--head:'Bricolage Grotesque',Georgia,serif;--sans:'Figtree',system-ui,sans-serif;}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:var(--sans);background:var(--paper);color:var(--ink);line-height:1.55;}
+  h1,h2,h3{font-family:var(--head);font-weight:700;letter-spacing:-.01em;}
+  a{color:var(--brand);}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 18px;}
+  .btn{display:inline-flex;align-items:center;gap:.4rem;font-family:var(--sans);font-weight:800;font-size:.92rem;padding:.6rem 1.05rem;border-radius:999px;border:2px solid transparent;cursor:pointer;text-decoration:none;transition:transform .1s,background .15s;}
+  .btn:active{transform:translateY(1px);}
+  .btn-primary{background:linear-gradient(180deg,#ffb98f,#e5713f);color:#3a1a0e;border:none;box-shadow:0 6px 16px rgba(224,98,58,.35);}
+  .btn-brand{background:var(--brand);color:#fff;}
+  .btn-ghost{background:transparent;border-color:var(--line);color:var(--ink);}
+  .btn-ghost:hover{border-color:var(--brand);color:var(--brand);}
+  .btn-sm{font-size:.82rem;padding:.42rem .8rem;}
+  input,textarea,select{width:100%;font-family:inherit;font-size:.98rem;color:var(--ink);background:var(--surface);border:2px solid var(--line);border-radius:10px;padding:10px 12px;}
+  input:focus,textarea:focus,select:focus{outline:none;border-color:var(--brand);}
+  label{display:block;font-weight:800;font-size:.86rem;margin:0 0 5px;}
+  .field{margin-bottom:13px;}
+  textarea{resize:vertical;min-height:70px;}
+
+  /* login gate */
+  #gate{position:fixed;inset:0;background:linear-gradient(160deg,#4b3f86,#2f2760);display:flex;align-items:center;justify-content:center;z-index:100;padding:20px;}
+  #gate .box{background:var(--surface);border-radius:20px;padding:30px;max-width:380px;width:100%;box-shadow:0 30px 60px rgba(0,0,0,.35);text-align:center;}
+  #gate h1{font-size:1.5rem;margin-bottom:4px;color:var(--brand);}
+  #gate p{color:var(--muted);font-size:.9rem;margin-bottom:18px;}
+  #gate .field{text-align:left;}
+  #gate .err{color:#c0392b;font-size:.85rem;min-height:1.1em;margin-top:2px;}
+
+  header{background:var(--brand);color:#fff;position:sticky;top:0;z-index:40;}
+  header .wrap{display:flex;align-items:center;justify-content:space-between;padding:12px 18px;gap:12px;}
+  header .lg{display:flex;align-items:center;gap:10px;font-family:var(--head);font-weight:800;font-size:1.1rem;}
+  header .lg svg{flex:none;}
+  header .out{background:rgba(255,255,255,.16);color:#fff;border:none;font-weight:700;padding:.45rem .9rem;border-radius:999px;cursor:pointer;font-family:inherit;}
+  .tabs{display:flex;gap:6px;flex-wrap:wrap;padding:14px 0 0;}
+  .tab{background:var(--surface);border:2px solid var(--line);border-bottom:none;border-radius:12px 12px 0 0;padding:.55rem 1.1rem;font-weight:800;cursor:pointer;color:var(--muted);font-family:inherit;font-size:.95rem;}
+  .tab.active{color:var(--brand);border-color:var(--brand);background:var(--soft);}
+  .panel{display:none;background:var(--surface);border:2px solid var(--line);border-radius:0 14px 14px 14px;padding:22px;margin-bottom:40px;}
+  .panel.active{display:block;}
+  .panel h2{font-size:1.35rem;margin-bottom:4px;}
+  .panel .hint{color:var(--muted);font-size:.9rem;margin-bottom:18px;}
+  .save-row{display:flex;gap:10px;align-items:center;margin-top:8px;flex-wrap:wrap;}
+  .saved{color:var(--ok);font-weight:800;font-size:.9rem;opacity:0;transition:opacity .2s;}
+  .saved.show{opacity:1;}
+  .svc-item{border:1px solid var(--line);border-radius:12px;padding:14px;margin-bottom:12px;background:var(--paper);}
+  .svc-item .n{font-weight:800;color:var(--brand);font-size:.8rem;text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px;}
+  .row2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+
+  /* flyers */
+  .kit-tools{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px;align-items:center;}
+  .fgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;}
+  .fcard{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--paper);display:flex;flex-direction:column;}
+  .fprev{aspect-ratio:4/5;position:relative;color:#fff;padding:22px;display:flex;flex-direction:column;overflow:hidden;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  .fprev .tag{align-self:flex-start;background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:4px 12px;font-size:.72rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;}
+  .fprev .em{position:absolute;top:18px;right:18px;font-family:var(--head);font-weight:800;font-size:.8rem;opacity:.9;}
+  .fprev h3{font-family:var(--head);font-size:1.5rem;line-height:1.08;margin-top:auto;}
+  .fprev .st{font-weight:800;margin-top:6px;opacity:.96;font-size:.95rem;}
+  .fprev .bd{font-size:.82rem;opacity:.92;margin-top:8px;line-height:1.4;}
+  .fprev .cta{align-self:flex-start;margin-top:12px;background:#fff;color:#3a1a0e;font-weight:800;font-size:.8rem;padding:7px 14px;border-radius:999px;}
+  .fprev .ft{margin-top:10px;font-size:.68rem;opacity:.85;border-top:1px solid rgba(255,255,255,.25);padding-top:7px;}
+  .fbody{padding:12px 14px;}
+  .fbtns{display:flex;flex-wrap:wrap;gap:6px;}
+  .fbtns .btn{font-size:.78rem;padding:.36rem .7rem;border-radius:9px;}
+  .chip{background:var(--surface);border:1px solid var(--line);}
+  .toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--ink);color:#fff;padding:11px 20px;border-radius:999px;font-weight:700;font-size:.9rem;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;z-index:120;}
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(-4px);}
+  .muted{color:var(--muted);font-size:.85rem;}
+  @media(max-width:720px){.fgrid,.row2{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="gate">
+  <div class="box">
+    <svg width="52" height="52" viewBox="0 0 40 40" style="margin:0 auto 10px;display:block;"><rect width="40" height="40" rx="11" fill="#4b3f86"/><path d="M20 30c-6.5-4.2-9.5-8-9.5-12A4.8 4.8 0 0120 15.4 4.8 4.8 0 0129.5 18c0 4-3 7.8-9.5 12z" fill="#ef7f57"/></svg>
+    <h1>Gracebound Admin</h1>
+    <p>Staff sign-in</p>
+    <form id="gateForm">
+      <div class="field"><label for="gu">Username</label><input id="gu" autocomplete="username"></div>
+      <div class="field"><label for="gp">Password</label><input id="gp" type="password" autocomplete="current-password"></div>
+      <div class="err" id="gerr"></div>
+      <button class="btn btn-primary" style="width:100%;justify-content:center;margin-top:6px;">Sign in</button>
+    </form>
+  </div>
+</div>
+
+<!-- APP -->
+<div id="app" style="display:none;">
+  <header>
+    <div class="wrap">
+      <div class="lg"><svg width="30" height="30" viewBox="0 0 40 40"><rect width="40" height="40" rx="10" fill="rgba(255,255,255,.16)"/><path d="M20 30c-6.5-4.2-9.5-8-9.5-12A4.8 4.8 0 0120 15.4 4.8 4.8 0 0129.5 18c0 4-3 7.8-9.5 12z" fill="#ef7f57"/></svg> Gracebound Admin Studio</div>
+      <button class="out" id="logout">Log out</button>
+    </div>
+  </header>
+
+  <div class="wrap">
+    <div class="tabs">
+      <button class="tab active" data-t="content">Content &amp; tiles</button>
+      <button class="tab" data-t="contact">Contact info</button>
+      <button class="tab" data-t="kit">Marketing kit</button>
+      <button class="tab" data-t="account">Account</button>
+    </div>
+
+    <!-- CONTENT -->
+    <section class="panel active" id="p-content">
+      <h2>Homepage content &amp; service tiles</h2>
+      <p class="hint">Edit the headline, intro and the eight service tiles shown on the live site. Changes save on this device/browser.</p>
+      <div class="field"><label>Hero headline (you can use &lt;span class="hl"&gt;…&lt;/span&gt; for the orange highlight)</label><textarea id="cHeroTitle"></textarea></div>
+      <div class="field"><label>Hero intro paragraph</label><textarea id="cHeroSub"></textarea></div>
+      <h3 style="margin:14px 0 8px;font-size:1.05rem;">Service tiles</h3>
+      <div id="svcEditor"></div>
+      <div class="save-row"><button class="btn btn-primary" id="saveContent">Save content</button><button class="btn btn-ghost btn-sm" id="resetContent">Reset to default</button><span class="saved" id="savedContent">✓ Saved</span></div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="panel" id="p-contact">
+      <h2>Contact information</h2>
+      <p class="hint">These update the phone, email, address and hours across the whole website. All enquiries go to this phone &amp; email.</p>
+      <div class="row2">
+        <div class="field"><label>Phone (display)</label><input id="cPhone"></div>
+        <div class="field"><label>Email</label><input id="cEmail" type="email"></div>
+      </div>
+      <div class="row2">
+        <div class="field"><label>Address line 1</label><input id="cAddr1"></div>
+        <div class="field"><label>Address line 2 (city, state ZIP)</label><input id="cAddr2"></div>
+      </div>
+      <div class="field"><label>Availability / hours</label><input id="cHours"></div>
+      <div class="save-row"><button class="btn btn-primary" id="saveContact">Save contact</button><span class="saved" id="savedContact">✓ Saved</span></div>
+    </section>
+
+    <!-- MARKETING KIT -->
+    <section class="panel" id="p-kit">
+      <h2>Marketing kit — 10 ready flyers</h2>
+      <p class="hint">Share any flyer to WhatsApp, Facebook, Instagram, X and more. <b>Share</b> opens your phone's share sheet with the flyer image attached (best for Instagram &amp; WhatsApp); <b>PNG</b> downloads the image to post anywhere.</p>
+      <div class="kit-tools">
+        <button class="btn btn-brand btn-sm" id="newFlyer">+ New flyer</button>
+        <button class="btn btn-ghost btn-sm" id="resetFlyers">Reset flyers</button>
+        <span class="muted">Tip: images are 1080×1350 — perfect for Instagram &amp; Facebook.</span>
+      </div>
+      <div id="editor" style="display:none;border:2px solid var(--brand);border-radius:14px;padding:16px;margin-bottom:18px;background:var(--soft);">
+        <input type="hidden" id="eIdx">
+        <div class="row2">
+          <div class="field"><label>Tag (small label)</label><input id="eTag"></div>
+          <div class="field"><label>Accent color</label><select id="eAccent"><option value="purple">Purple</option><option value="coral">Coral</option><option value="plum">Plum</option><option value="teal">Teal</option><option value="gold">Gold</option><option value="rose">Rose</option></select></div>
+        </div>
+        <div class="field"><label>Title</label><input id="eTitle"></div>
+        <div class="field"><label>Subtitle</label><input id="eSub"></div>
+        <div class="field"><label>Body</label><textarea id="eBody"></textarea></div>
+        <div class="field"><label>Button / call-to-action</label><input id="eCta"></div>
+        <div class="save-row"><button class="btn btn-primary btn-sm" id="saveFlyer">Save flyer</button><button class="btn btn-ghost btn-sm" id="cancelFlyer">Cancel</button></div>
+      </div>
+      <div class="fgrid" id="fgrid"></div>
+    </section>
+
+    <!-- ACCOUNT -->
+    <section class="panel" id="p-account">
+      <h2>Account &amp; password</h2>
+      <p class="hint">Change the admin username and password used to sign in here.</p>
+      <div class="row2">
+        <div class="field"><label>Username</label><input id="aUser" autocomplete="username"></div>
+        <div class="field"><label>Current password</label><input id="aCur" type="password" autocomplete="current-password"></div>
+      </div>
+      <div class="row2">
+        <div class="field"><label>New password</label><input id="aNew" type="password" autocomplete="new-password"></div>
+        <div class="field"><label>Confirm new password</label><input id="aNew2" type="password" autocomplete="new-password"></div>
+      </div>
+      <div class="err" id="aerr" style="color:#c0392b;font-size:.85rem;min-height:1.1em;"></div>
+      <div class="save-row"><button class="btn btn-primary" id="saveAccount">Update account</button><span class="saved" id="savedAccount">✓ Updated</span></div>
+      <p class="muted" style="margin-top:14px;">Default is <b>admin</b> / <b>gracebound2026</b> until you change it. Credentials are stored on this device only (demo).</p>
+    </section>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="assets/data.js"></script>
+<script>
+  var SITE="https://graceboundhealthservices.com";
+  function $(id){return document.getElementById(id);}
+  function esc(s){return (s||'').replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+  function toast(m){var t=$('toast');t.textContent=m;t.classList.add('show');clearTimeout(t._t);t._t=setTimeout(function(){t.classList.remove('show');},2200);}
+  function flashSaved(id){var e=$(id);e.classList.add('show');setTimeout(function(){e.classList.remove('show');},1600);}
+
+  /* ---------- AUTH ---------- */
+  function authed(){try{return sessionStorage.getItem('gb-admin-ok')==='1';}catch(e){return false;}}
+  function showApp(){$('gate').style.display='none';$('app').style.display='block';initAll();}
+  if(authed()) showApp();
+  $('gateForm').addEventListener('submit',function(e){
+    e.preventDefault();var cred=GB.getCred();
+    if($('gu').value.trim()===cred.user && $('gp').value===cred.pass){ try{sessionStorage.setItem('gb-admin-ok','1');}catch(_){}$('gerr').textContent='';showApp(); }
+    else { $('gerr').textContent='Incorrect username or password.'; }
+  });
+  $('logout').addEventListener('click',function(){try{sessionStorage.removeItem('gb-admin-ok');}catch(e){}location.reload();});
+
+  /* ---------- TABS ---------- */
+  document.querySelectorAll('.tab').forEach(function(t){t.addEventListener('click',function(){
+    document.querySelectorAll('.tab').forEach(function(x){x.classList.remove('active');});
+    document.querySelectorAll('.panel').forEach(function(x){x.classList.remove('active');});
+    t.classList.add('active');$('p-'+t.dataset.t).classList.add('active');
+  });});
+
+  var inited=false;
+  function initAll(){ if(inited)return; inited=true; initContent(); initContact(); initKit(); initAccount(); }
+
+  /* ---------- CONTENT ---------- */
+  function initContent(){
+    var c=GB.getContent();
+    $('cHeroTitle').value=c.heroTitle; $('cHeroSub').value=c.heroSub;
+    var host=$('svcEditor');host.innerHTML='';
+    c.services.forEach(function(s,i){
+      var d=document.createElement('div');d.className='svc-item';
+      d.innerHTML='<div class="n">Tile '+(i+1)+'</div><div class="row2"><div class="field"><label>Title</label><input class="svcT" value="'+esc(s.t)+'"></div><div class="field" style="margin-bottom:0;"><label>Description</label><input class="svcD" value="'+esc(s.d)+'"></div></div>';
+      host.appendChild(d);
+    });
+  }
+  $('saveContent').onclick=function(){
+    var svc=[];var ts=document.querySelectorAll('.svcT'),ds=document.querySelectorAll('.svcD');
+    for(var i=0;i<ts.length;i++){svc.push({t:ts[i].value,d:ds[i].value});}
+    GB.saveContent({heroTitle:$('cHeroTitle').value,heroSub:$('cHeroSub').value,services:svc});
+    flashSaved('savedContent');toast('Content saved — refresh the site to see it');
+  };
+  $('resetContent').onclick=function(){if(confirm('Reset homepage content to the original?')){try{localStorage.removeItem('gb-content');}catch(e){}initedContentReset();}};
+  function initedContentReset(){var c=GB.DEFAULT_CONTENT;$('cHeroTitle').value=c.heroTitle;$('cHeroSub').value=c.heroSub;GB.saveContent(c);initContent();toast('Reset to default');}
+
+  /* ---------- CONTACT ---------- */
+  function initContact(){var c=GB.getContact();$('cPhone').value=c.phone;$('cEmail').value=c.email;$('cAddr1').value=c.addr1;$('cAddr2').value=c.addr2;$('cHours').value=(c.hours||'').replace(/&amp;/g,'&');}
+  $('saveContact').onclick=function(){
+    var phone=$('cPhone').value.trim();
+    var tel='+'+phone.replace(/[^0-9]/g,''); if(tel.length<=1) tel='';
+    if(tel && tel.indexOf('+1')!==0 && phone.replace(/[^0-9]/g,'').length===10) tel='+1'+phone.replace(/[^0-9]/g,'');
+    GB.saveContact({phone:phone,tel:tel,email:$('cEmail').value.trim(),addr1:$('cAddr1').value.trim(),addr2:$('cAddr2').value.trim(),hours:$('cHours').value.trim(),area:GB.getContact().area});
+    flashSaved('savedContact');toast('Contact saved — it now shows across the site');
+  };
+
+  /* ---------- ACCOUNT ---------- */
+  function initAccount(){$('aUser').value=GB.getCred().user;}
+  $('saveAccount').onclick=function(){
+    var cred=GB.getCred();$('aerr').textContent='';
+    if($('aCur').value!==cred.pass){$('aerr').textContent='Current password is incorrect.';return;}
+    var np=$('aNew').value;
+    if(np && np.length<6){$('aerr').textContent='New password must be at least 6 characters.';return;}
+    if(np && np!==$('aNew2').value){$('aerr').textContent='New passwords do not match.';return;}
+    GB.saveCred({user:$('aUser').value.trim()||cred.user, pass:np||cred.pass});
+    $('aCur').value=$('aNew').value=$('aNew2').value='';
+    flashSaved('savedAccount');toast('Account updated');
+  };
+
+  /* ---------- MARKETING KIT ---------- */
+  function caption(f){ var c=GB.getContact(); return f.title+' — '+f.subtitle+'. Gracebound Health Services, in-home non-medical care in Katy, TX. Call '+c.phone+' · '+SITE; }
+  function renderKit(){
+    var flyers=GB.getFlyers(), host=$('fgrid');host.innerHTML='';
+    flyers.forEach(function(f,i){
+      var col=(GB.accentHex[f.accent]||GB.accentHex.purple);
+      var card=document.createElement('div');card.className='fcard';
+      card.innerHTML=
+        '<div class="fprev" style="background:linear-gradient(160deg,'+col.a+','+col.b+');">'
+        +'<span class="em">Gracebound</span>'
+        +'<span class="tag">'+esc(f.tag)+'</span>'
+        +'<h3>'+esc(f.title)+'</h3>'
+        +'<div class="st">'+esc(f.subtitle)+'</div>'
+        +'<div class="bd">'+esc(f.body)+'</div>'
+        +'<span class="cta">'+esc(f.cta)+'</span>'
+        +'<div class="ft">graceboundhealthservices.com · (Katy, TX)</div>'
+        +'</div>'
+        +'<div class="fbody"><div class="fbtns">'
+        +'<button class="btn btn-primary btn-sm" data-a="share" data-i="'+i+'">Share</button>'
+        +'<button class="btn chip btn-sm" data-a="png" data-i="'+i+'">PNG</button>'
+        +'<button class="btn chip btn-sm" data-a="wa" data-i="'+i+'">WhatsApp</button>'
+        +'<button class="btn chip btn-sm" data-a="fb" data-i="'+i+'">Facebook</button>'
+        +'<button class="btn chip btn-sm" data-a="x" data-i="'+i+'">X</button>'
+        +'<button class="btn chip btn-sm" data-a="li" data-i="'+i+'">LinkedIn</button>'
+        +'<button class="btn chip btn-sm" data-a="cap" data-i="'+i+'">Copy caption</button>'
+        +'<button class="btn btn-ghost btn-sm" data-a="edit" data-i="'+i+'">Edit</button>'
+        +'<button class="btn btn-ghost btn-sm" data-a="del" data-i="'+i+'">Delete</button>'
+        +'</div></div>';
+      host.appendChild(card);
+    });
+  }
+  $('fgrid').addEventListener('click',function(e){
+    var b=e.target.closest('button[data-a]');if(!b)return;
+    var i=+b.dataset.i, f=GB.getFlyers()[i], a=b.dataset.a;
+    if(a==='share') shareFlyer(f);
+    else if(a==='png') downloadFlyer(f);
+    else if(a==='wa') window.open('https://wa.me/?text='+encodeURIComponent(caption(f)),'_blank');
+    else if(a==='fb') window.open('https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(SITE)+'&quote='+encodeURIComponent(caption(f)),'_blank');
+    else if(a==='x') window.open('https://twitter.com/intent/tweet?text='+encodeURIComponent(f.title+' — '+f.subtitle+'. Gracebound Health Services, Katy TX.')+'&url='+encodeURIComponent(SITE),'_blank');
+    else if(a==='li') window.open('https://www.linkedin.com/sharing/share-offsite/?url='+encodeURIComponent(SITE),'_blank');
+    else if(a==='cap'){ navigator.clipboard.writeText(caption(f)).then(function(){toast('Caption copied');},function(){toast('Copy failed');}); }
+    else if(a==='edit') openEditor(i);
+    else if(a==='del'){ if(confirm('Delete this flyer?')){var arr=GB.getFlyers();arr.splice(i,1);GB.saveFlyers(arr);renderKit();toast('Deleted');} }
+  });
+  function openEditor(i){
+    var arr=GB.getFlyers(), f=(i>-1?arr[i]:{tag:'',title:'',subtitle:'',body:'',cta:'',accent:'purple'});
+    $('eIdx').value=i;$('eTag').value=f.tag;$('eTitle').value=f.title;$('eSub').value=f.subtitle;$('eBody').value=f.body;$('eCta').value=f.cta;$('eAccent').value=f.accent||'purple';
+    $('editor').style.display='block';$('editor').scrollIntoView({behavior:'smooth',block:'center'});
+  }
+  $('newFlyer').onclick=function(){openEditor(-1);};
+  $('cancelFlyer').onclick=function(){$('editor').style.display='none';};
+  $('saveFlyer').onclick=function(){
+    var arr=GB.getFlyers(), i=$('eIdx').value;
+    var f={id:(i>-1?arr[i].id:'f-'+Date.now()),tag:$('eTag').value,title:$('eTitle').value,subtitle:$('eSub').value,body:$('eBody').value,cta:$('eCta').value,accent:$('eAccent').value};
+    if(i>-1) arr[i]=f; else arr.push(f);
+    GB.saveFlyers(arr);$('editor').style.display='none';renderKit();toast('Flyer saved');
+  };
+  $('resetFlyers').onclick=function(){if(confirm('Reset all flyers to the original 10?')){GB.saveFlyers(GB.DEFAULT_FLYERS.slice());renderKit();toast('Flyers reset');}};
+
+  /* ---------- FLYER IMAGE (canvas 1080x1350) ---------- */
+  function roundRect(x,X,Y,W,H,r){x.beginPath();x.moveTo(X+r,Y);x.arcTo(X+W,Y,X+W,Y+H,r);x.arcTo(X+W,Y+H,X,Y+H,r);x.arcTo(X,Y+H,X,Y,r);x.arcTo(X,Y,X+W,Y,r);x.closePath();}
+  function wrap(x,text,X,Y,maxW,lh){var words=(text||'').split(' '),line='';for(var i=0;i<words.length;i++){var t=line+words[i]+' ';if(x.measureText(t).width>maxW&&line){x.fillText(line.trim(),X,Y);line=words[i]+' ';Y+=lh;}else line=t;}if(line.trim()){x.fillText(line.trim(),X,Y);Y+=lh;}return Y;}
+  function renderFlyerCanvas(f){
+    return document.fonts.ready.then(function(){
+      var W=1080,H=1350,cv=document.createElement('canvas');cv.width=W;cv.height=H;var x=cv.getContext('2d');
+      var col=(GB.accentHex[f.accent]||GB.accentHex.purple);
+      var g=x.createLinearGradient(0,0,W*0.5,H);g.addColorStop(0,col.a);g.addColorStop(1,col.b);x.fillStyle=g;x.fillRect(0,0,W,H);
+      var rg=x.createRadialGradient(W*0.82,90,0,W*0.82,90,W*0.9);rg.addColorStop(0,'rgba(255,255,255,.18)');rg.addColorStop(.6,'rgba(255,255,255,0)');x.fillStyle=rg;x.fillRect(0,0,W,H);
+      var pad=92;
+      // brand wordmark
+      x.textBaseline='alphabetic';x.fillStyle='rgba(255,255,255,.92)';x.font='800 34px Bricolage Grotesque, Georgia, serif';x.textAlign='right';x.fillText('Gracebound',W-pad,108);x.textAlign='left';
+      // tag pill
+      x.font='800 30px Figtree, sans-serif';var tag=(f.tag||'').toUpperCase(),tw=x.measureText(tag).width;
+      x.fillStyle='rgba(255,255,255,.20)';roundRect(x,pad,86,tw+52,60,30);x.fill();
+      x.fillStyle='#fff';x.textBaseline='middle';x.fillText(tag,pad+26,118);x.textBaseline='alphabetic';
+      // title
+      x.fillStyle='#fff';x.font='700 92px Bricolage Grotesque, Georgia, serif';var ty=560;ty=wrap(x,f.title,pad,ty,W-pad*2,98);
+      // subtitle
+      x.font='800 44px Figtree, sans-serif';x.fillStyle='rgba(255,255,255,.97)';ty+=18;ty=wrap(x,f.subtitle,pad,ty,W-pad*2,56);
+      // body
+      x.font='400 36px Figtree, sans-serif';x.fillStyle='rgba(255,255,255,.9)';ty+=16;ty=wrap(x,f.body,pad,ty,W-pad*2,50);
+      // CTA pill
+      var cy=H-260;x.fillStyle='#ffffff';roundRect(x,pad,cy,W-pad*2,104,22);x.fill();
+      x.fillStyle=col.b;x.font='800 40px Figtree, sans-serif';x.textAlign='center';x.textBaseline='middle';x.fillText(f.cta||'',W/2,cy+52);x.textAlign='left';x.textBaseline='alphabetic';
+      // footer
+      var c=GB.getContact();x.fillStyle='rgba(255,255,255,.9)';x.font='600 30px Figtree, sans-serif';x.fillText('graceboundhealthservices.com',pad,H-96);
+      x.textAlign='right';x.fillText(c.phone,W-pad,H-96);x.textAlign='left';
+      return cv;
+    });
+  }
+  function shareFlyer(f){
+    toast('Preparing image…');
+    renderFlyerCanvas(f).then(function(cv){ cv.toBlob(function(blob){
+      var file=new File([blob],(f.id||'flyer')+'.png',{type:'image/png'});
+      if(navigator.canShare && navigator.canShare({files:[file]})){
+        navigator.share({files:[file],title:f.title,text:caption(f)}).catch(function(){});
+      } else { dl(blob,file.name); toast('Image downloaded — post it to any platform'); }
+    },'image/png'); });
+  }
+  function downloadFlyer(f){ renderFlyerCanvas(f).then(function(cv){ cv.toBlob(function(blob){ dl(blob,(f.id||'flyer')+'.png'); toast('PNG downloaded'); },'image/png'); }); }
+  function dl(blob,name){var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;document.body.appendChild(a);a.click();setTimeout(function(){URL.revokeObjectURL(a.href);a.remove();},1000);}
+
+  function initKit(){ renderKit(); }
+</script>
+</body>
+</html>

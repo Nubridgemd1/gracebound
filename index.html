@@ -128,6 +128,17 @@
     linear-gradient(160deg,var(--brand),var(--brand-dk));box-shadow:var(--shadow);display:grid;place-items:center;color:#fff;text-align:center;padding:30px;}
   .panel-img .q{font-family:var(--head);font-size:1.45rem;line-height:1.3;max-width:23ch;font-weight:600;}
   .panel-img .cap{margin-top:14px;font-weight:700;opacity:.92;}
+  .panel-photo{position:relative;border-radius:24px;overflow:hidden;min-height:360px;box-shadow:var(--shadow);}
+  .panel-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+  .panel-photo .ov{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:26px;background:linear-gradient(180deg,rgba(41,37,64,0) 35%,rgba(41,37,64,.82));color:#fff;}
+  .panel-photo .q{font-family:var(--head);font-size:1.3rem;line-height:1.3;font-weight:600;}
+  .panel-photo .cap{margin-top:8px;font-weight:700;opacity:.92;font-size:.95rem;}
+  .gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+  .gcard{border-radius:var(--r);overflow:hidden;border:1px solid var(--line);box-shadow:var(--shadow);background:var(--surface);}
+  .gcard img{width:100%;height:290px;object-fit:cover;display:block;}
+  .gcard .cap{padding:15px 18px;font-weight:800;color:var(--ink);}
+  .gcard .cap span{display:block;font-weight:500;color:var(--muted);font-size:.96rem;margin-top:2px;}
+  @media(max-width:940px){.gallery{grid-template-columns:1fr;max-width:460px;margin:0 auto;}}
 
   /* steps */
   .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;}
@@ -211,7 +222,7 @@
 <header>
   <div class="topbar">
     <div class="wrap">
-      <div>📞 <a href="tel:+15551234567">(555) 123-4567</a> &nbsp;·&nbsp; Caregivers available 24/7</div>
+      <div>📞 <a href="tel:+12013493486">(201) 349-3486</a> &nbsp;·&nbsp; Caregivers available 24/7</div>
       <div class="a11y" role="group" aria-label="Text size">
         <span class="lbl">Text size</span>
         <button type="button" id="fsDown" aria-label="Decrease text size">A−</button>
@@ -248,11 +259,11 @@
     <div class="wrap">
       <div>
         <span class="eyebrow">Compassionate, non-medical in-home care</span>
-        <h1>Caring support that <span class="hl">comes to you</span>, right at home.</h1>
-        <p class="lead">Gracebound Health Services provides warm, non-medical personal assistance in the comfort of your own home — from help with daily routines to friendly companionship. No facility to move into. Our vetted caregivers come to your residence.</p>
+        <h1 id="heroTitle">Caring support that <span class="hl">comes to you</span>, right at home.</h1>
+        <p class="lead" id="heroSub">Gracebound Health Services provides warm, non-medical personal assistance in the comfort of your own home — from help with daily routines to friendly companionship. No facility to move into. Our vetted caregivers come to your residence.</p>
         <div class="cta">
           <a href="#contact" class="btn btn-primary btn-lg">Request care today</a>
-          <a href="tel:+15551234567" class="btn btn-ghost btn-lg">📞 Call (555) 123-4567</a>
+          <a href="tel:+12013493486" class="btn btn-ghost btn-lg">📞 Call (201) 349-3486</a>
         </div>
         <div class="pts">
           <span><span class="tick">✓</span> Caregivers come to your home</span>
@@ -270,7 +281,7 @@
           <li><span class="tick" aria-hidden="true">✓</span><div><b>We visit you</b> — care is delivered in your own residence</div></li>
           <li><span class="tick" aria-hidden="true">✓</span><div><b>Personalized plan</b> — only the help you actually need</div></li>
           <li><span class="tick" aria-hidden="true">✓</span><div><b>Matched caregiver</b> — vetted, trained and a good fit</div></li>
-          <li><span class="tick" aria-hidden="true">✓</span><div><b>No long contracts</b> — adjust or pause any time</div></li>
+          <li><span class="tick" aria-hidden="true">✓</span><div><b>Family updates</b> — clear communication every step of the way</div></li>
         </ul>
       </div>
     </div>
@@ -291,7 +302,7 @@
         <h2>Non-medical personal assistance, at home</h2>
         <p class="lead">Everyday support that helps you or your loved one stay safe, comfortable and independent — provided wherever you call home.</p>
       </div>
-      <div class="grid">
+      <div class="grid" id="svcGrid">
         <div class="card"><div class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="7" r="3.2"/><path d="M5 20c0-3.5 3-6 7-6s7 2.5 7 6"/></svg></div><h3>Personal care</h3><p>Respectful help with bathing, grooming, dressing, toileting and everyday hygiene.</p></div>
         <div class="card"><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.4-7-10a7 7 0 0114 0c0 5.6-7 10-7 10z"/><circle cx="12" cy="11" r="2.4"/></svg></div><h3>Companionship</h3><p>Friendly conversation, activities, hobbies and outings — and a caring, watchful presence.</p></div>
         <div class="card"><div class="ic"><svg viewBox="0 0 24 24"><path d="M4 20v-8l8-6 8 6v8"/><path d="M9 20v-5h6v5"/></svg></div><h3>Homemaking</h3><p>Light housekeeping, laundry, tidying and keeping the home safe and comfortable.</p></div>
@@ -322,6 +333,22 @@
     </div>
   </section>
 
+  <!-- CARE IN ACTION -->
+  <section id="gallery">
+    <div class="wrap">
+      <div class="sh">
+        <span class="eyebrow">Care in action</span>
+        <h2>Real, compassionate care — in the home</h2>
+        <p class="lead">Warm, respectful support from caregivers who treat your loved one like their own family.</p>
+      </div>
+      <div class="gallery">
+        <div class="gcard"><img src="assets/img/care1.jpg" alt="A Gracebound caregiver bringing a warm drink to a smiling senior in her armchair at home" loading="lazy"><div class="cap">Companionship &amp; comfort<span>A friendly presence and a helping hand, every day</span></div></div>
+        <div class="gcard"><img src="assets/img/care2.jpg" alt="A caregiver gently helping an elderly woman with her hair and grooming at home" loading="lazy"><div class="cap">Personal care with dignity<span>Gentle help with grooming and daily routines</span></div></div>
+        <div class="gcard"><img src="assets/img/care3.jpg" alt="A caregiver helping an elderly client drink from a glass" loading="lazy"><div class="cap">Everyday assistance<span>Meals, hydration and staying comfortable</span></div></div>
+      </div>
+    </div>
+  </section>
+
   <!-- WHY US -->
   <section id="why">
     <div class="wrap split">
@@ -335,11 +362,12 @@
           <li><span class="tick" aria-hidden="true">✓</span> Flexible scheduling, from a few hours a week to 24/7</li>
           <li><span class="tick" aria-hidden="true">✓</span> Personalized plans, thoughtful caregiver matching</li>
           <li><span class="tick" aria-hidden="true">✓</span> Ongoing family updates and easy caregiver changes</li>
-          <li><span class="tick" aria-hidden="true">✓</span> No long-term contracts — adjust or pause any time</li>
+          <li><span class="tick" aria-hidden="true">✓</span> Locally owned and dedicated to our Katy-area community</li>
         </ul>
       </div>
-      <div class="panel-img">
-        <div>
+      <div class="panel-photo">
+        <img src="assets/img/care2.jpg" alt="A Gracebound caregiver tenderly caring for an elderly woman in her own home">
+        <div class="ov">
           <div class="q">&ldquo;Mom stayed in her own home, with someone kind she trusts by her side. It gave our whole family peace of mind.&rdquo;</div>
           <div class="cap">— A Gracebound family · illustrative</div>
         </div>
@@ -422,15 +450,17 @@
       </div>
       <div class="areas-grid">
         <div>
-          <p class="lead" style="font-size:1.05rem;">Proudly serving <b>[Your City]</b> and the surrounding areas, including:</p>
+          <p class="lead" style="font-size:1.05rem;">Proudly serving <b>Katy, Texas</b> and the surrounding communities, including:</p>
           <ul class="arealist">
-            <span>[Neighborhood One]</span><span>[Neighborhood Two]</span><span>[Neighborhood Three]</span>
-            <span>[Suburb / Town]</span><span>[Suburb / Town]</span><span>[County / Region]</span>
+            <span>Katy</span><span>Cinco Ranch</span><span>Cross Creek Ranch</span>
+            <span>Fulshear</span><span>Richmond</span><span>Cypress</span>
+            <span>Brookshire</span><span>Sugar Land</span><span>West Houston</span>
+            <span>Fort Bend County</span><span>Waller County</span>
           </ul>
           <p style="margin-top:16px;color:var(--muted);">Not sure if we cover your area? <a href="#contact" style="color:var(--brand);font-weight:700;">Just ask</a> — we're often able to help nearby, too.</p>
         </div>
-        <div class="map" role="img" aria-label="Map placeholder of the Gracebound service area">
-          <div>🗺️<br>Our service area<br><span style="font-weight:600;color:var(--muted);">(Add your city &amp; a map here)</span></div>
+        <div class="map" role="img" aria-label="Map of the Gracebound service area around Katy, Texas">
+          <div>🗺️<br><b style="color:var(--brand);">Katy, Texas 77493</b><br><span style="font-weight:600;color:var(--muted);">3947 Woodland Phlox Drive · serving the greater Katy area</span></div>
         </div>
       </div>
     </div>
@@ -446,8 +476,8 @@
         <details><summary>Are your caregivers screened?</summary><p>Yes. Caregivers are background-checked, carefully interviewed and trained, and we are insured and bonded. We also match you with a caregiver suited to your needs and personality.</p></details>
         <details><summary>Is there a minimum number of hours?</summary><p>We keep it flexible. Whether you need a few hours a week or around-the-clock support, we'll build a plan that fits. We'll go over any minimums during your free consultation.</p></details>
         <details><summary>Can we choose or change our caregiver?</summary><p>Absolutely. Your comfort matters — if a match isn't quite right, just let us know and we'll arrange a change.</p></details>
-        <details><summary>How do we pay?</summary><p>Most families pay privately, and long-term care insurance may apply. We'll explain simple, transparent options with no long-term contracts.</p></details>
-        <details><summary>How do we get started?</summary><p>Call (555) 123‑4567 or send the request form below. We'll schedule a free in-home visit, answer your questions, and create a care plan together.</p></details>
+        <details><summary>How do we pay?</summary><p>Most families pay privately, and long-term care insurance may apply. We'll explain simple, transparent options and build a plan that fits your budget.</p></details>
+        <details><summary>How do we get started?</summary><p>Call (201) 349-3486 or send the request form below. We'll schedule a free in-home visit, answer your questions, and create a care plan together.</p></details>
       </div>
     </div>
   </section>
@@ -462,10 +492,10 @@
       </div>
       <div class="contact-grid">
         <ul class="info">
-          <li><div class="d"><svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A16 16 0 013 6a2 2 0 012-2z"/></svg></div><div><b>Call or text</b><br><a href="tel:+15551234567">(555) 123-4567</a></div></li>
-          <li><div class="d"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M4 7l8 6 8-6"/></svg></div><div><b>Email</b><br><a href="mailto:care@graceboundhealthservices.com">care@graceboundhealthservices.com</a></div></li>
-          <li><div class="d"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.35-7-10a7 7 0 0114 0c0 5.65-7 10-7 10z"/><circle cx="12" cy="11" r="2.5"/></svg></div><div><b>Service area</b><br><span>[Your City] &amp; surrounding communities · office visits by appointment</span></div></li>
-          <li><div class="d"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div><div><b>Available</b><br><span>Care 24/7 · office phone daily 8am–7pm</span></div></li>
+          <li><div class="d"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.35-7-10a7 7 0 0114 0c0 5.65-7 10-7 10z"/><circle cx="12" cy="11" r="2.5"/></svg></div><div><b>Office / mailing address</b><br><span data-c="addr">3947 Woodland Phlox Drive<br>Katy, Texas 77493</span></div></li>
+          <li><div class="d"><svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A16 16 0 013 6a2 2 0 012-2z"/></svg></div><div><b>Call or text</b><br><a href="tel:+12013493486" data-c="phone">(201) 349-3486</a></div></li>
+          <li><div class="d"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M4 7l8 6 8-6"/></svg></div><div><b>Email</b><br><a href="mailto:graceboundhealthservices@gmail.com" data-c="email">graceboundhealthservices@gmail.com</a></div></li>
+          <li><div class="d"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div><div><b>Available</b><br><span data-c="hours">Care available 24/7 · office phone daily 8am–7pm</span></div></li>
         </ul>
         <form id="careForm" aria-label="Request care form">
           <div class="row2">
@@ -481,7 +511,7 @@
           </div>
           <div class="field"><label for="msg">Tell us a little more</label><textarea id="msg" name="msg" placeholder="When you'd like to start, the area you're in, and anything else we should know."></textarea></div>
           <button type="submit" class="btn btn-primary btn-lg" style="width:100%;justify-content:center;">Request care</button>
-          <p class="form-note">Prefer to talk? Call (555) 123‑4567 any time. Please don't include sensitive medical details in this form.</p>
+          <p class="form-note">Prefer to talk? Call (201) 349-3486 any time. Please don't include sensitive medical details in this form.</p>
         </form>
       </div>
     </div>
@@ -499,16 +529,37 @@
         <p style="opacity:.9;max-width:36ch;">Compassionate, non-medical personal assistance delivered in the comfort of your own home. Our caregivers come to you.</p>
       </div>
       <div><h4>Services</h4><a href="#services">Personal care</a><a href="#services">Companionship</a><a href="#services">Homemaking &amp; meals</a><a href="#services">Respite &amp; 24-hour</a></div>
-      <div><h4>Contact</h4><a href="tel:+15551234567">(555) 123-4567</a><a href="mailto:care@graceboundhealthservices.com">Email us</a><a href="#contact">Request care</a><a href="https://graceboundhealthservices.com">graceboundhealthservices.com</a></div>
+      <div><h4>Contact</h4><a href="tel:+12013493486" data-c="phone">(201) 349-3486</a><a href="mailto:graceboundhealthservices@gmail.com" data-c="email">Email us</a><span style="display:block;padding:5px 0;opacity:.92;" data-c="addrline">3947 Woodland Phlox Drive, Katy, TX 77493</span><a href="#contact">Request care</a><a href="admin.html">Staff admin</a></div>
     </div>
     <div class="foot-note" style="background:rgba(239,127,87,.16);border:1px solid rgba(239,127,87,.4);"><b>Licensing &amp; compliance.</b> Gracebound Health Services is licensed by Texas Health &amp; Human Services (HHSC) as a Home &amp; Community Support Services Agency — Personal Assistance Services (License No. <b>[add license #]</b>). We are insured, and our caregivers are background-checked (Texas DPS / FBI) and screened against the Nurse Aide and Employee Misconduct registries.</div>
-    <div class="foot-note"><b>Design concept / demo.</b> Gracebound Health Services is a sample website. Name, contact details, service areas and images are placeholders to be replaced. Gracebound provides <b>non-medical personal assistance</b> and is not a licensed medical, nursing or home-health agency; it does not provide medical treatment.</div>
+    <div class="foot-note">Gracebound Health Services provides <b>non-medical personal assistance</b> and is not a licensed medical, nursing or home-health agency; we do not provide medical treatment or administer medication. Some testimonials and photos are illustrative.</div>
     <div class="foot-bot">© <span id="yr"></span> Gracebound Health Services · In-Home Personal Assistance</div>
   </div>
 </footer>
 
+<script src="assets/data.js"></script>
 <script>
   document.getElementById('yr').textContent=new Date().getFullYear();
+
+  // Apply admin-saved contact + content overrides (per-device demo)
+  (function(){
+    if(!window.GB) return;
+    try{
+      var c=GB.getContact();
+      document.querySelectorAll('[data-c="phone"]').forEach(function(el){ el.textContent=c.phone; if(el.tagName==='A') el.href='tel:'+c.tel; });
+      document.querySelectorAll('[data-c="email"]').forEach(function(el){ if((el.textContent||'').indexOf('@')>-1) el.textContent=c.email; if(el.tagName==='A') el.href='mailto:'+c.email; });
+      document.querySelectorAll('[data-c="addr"]').forEach(function(el){ el.innerHTML=(c.addr1||'')+'<br>'+(c.addr2||''); });
+      document.querySelectorAll('[data-c="addrline"]').forEach(function(el){ el.textContent=(c.addr1||'')+', '+(c.addr2||''); });
+      document.querySelectorAll('[data-c="hours"]').forEach(function(el){ el.innerHTML=c.hours; });
+      var ct=GB.getContent(), ht=document.getElementById('heroTitle'), hs=document.getElementById('heroSub');
+      if(ht&&ct.heroTitle) ht.innerHTML=ct.heroTitle;
+      if(hs&&ct.heroSub) hs.textContent=ct.heroSub;
+      var grid=document.getElementById('svcGrid');
+      if(grid&&ct.services){ var cards=grid.querySelectorAll('.card'); ct.services.forEach(function(s,i){ if(cards[i]){ var h=cards[i].querySelector('h3'), p=cards[i].querySelector('p'); if(h&&s.t)h.textContent=s.t; if(p&&s.d)p.textContent=s.d; } }); }
+      window.__gbEmail=c.email;
+    }catch(e){}
+  })();
+
   var burger=document.getElementById('burger'), nav=document.getElementById('nav');
   burger.addEventListener('click',function(){var o=nav.classList.toggle('open');burger.setAttribute('aria-expanded',o?'true':'false');});
   nav.addEventListener('click',function(e){if(e.target.tagName==='A'){nav.classList.remove('open');burger.setAttribute('aria-expanded','false');}});
@@ -525,7 +576,7 @@
     e.preventDefault();var f=e.target;
     var s=encodeURIComponent('Gracebound care request — '+f.nm.value);
     var b=encodeURIComponent('Name: '+f.nm.value+'\nPhone: '+f.ph.value+'\nEmail: '+f.em.value+'\nCare for: '+f.who.value+'\nHelp with: '+f.svc.value+'\n\n'+f.msg.value);
-    window.location.href='mailto:care@graceboundhealthservices.com?subject='+s+'&body='+b;
+    window.location.href='mailto:'+(window.__gbEmail||'graceboundhealthservices@gmail.com')+'?subject='+s+'&body='+b;
   });
 </script>
 </body>
